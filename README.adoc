@@ -1,0 +1,61 @@
+= DISCOS
+:github: https://github.com/brunoalex88/discos
+
+=== O que fazemos
+
+* Vendemos discos utilizando uma taxa de cashback baseada em gêneros e dias da semana.
+
+=== Stack
+* Java
+* Spring Boot
+* Swagger
+* Lombok
+* Sonar
+* Maven
+* MySql
+* Intellij
+* Docker
+* Linux
+
+=== Como me executar
+
+. IDE
+- Utilizamos como IDE o Intellij com o plugin Lombok que aumenta a produtividade no momento
+do desenvolvimento e para seu funcionamento é necessário marcar a
+opção `*_annotation processor_*` nas configurações de build da IDE.
+
+. Configurando o banco de dados.
+- A API de discos realiza em seu start uma consulta no banco de dados para checar se já
+existem cadastrados registros de taxas de cashback e discos. Esses dados são necessários
+no início e serão inseridos na primeira vez que a API subir portanto garanta que a
+propriedade `*_spring.datasource.url_*` no arquivo `*_application-dev.properties_*` esteja
+devidamente configurada apontando para o endereço de algum banco de dados MySql.
+
+. Configurando o token do Spotify
+- Para a criação dos discos fazemos chamadas a Api do Spotify a fim de buscar artistas e
+albuns por gênero. Para isto precisamos do token de acesso do Spotify que pode
+ser obtido utilizando uma conta de desenvolvedor. Após obter o token ele deve ser
+informado na propriedade `*_spotify.token_*` do arquivo `*_application.properties_*`
+
+. Docker
+
+- Para testar nossa API você poderá iniciar ela de 3 maneiras para testá-la.
+Utilizando a IDE, Maven ou Docker. Para iniciar a partir do Docker basta
+entrar na pasta da aplicação e digitar os comandos:
+
+[source,xml,indent=4]
+----
+docker build -t app .
+
+docker run -d --name app -p 8080:8080 app
+----
+
+=== Testando
+
+Pronto, a aplicação estará rodando na porta 8080. Para facilitar o teste da API
+utilizamos o Swagger, para testar acesse http://localhost:8080/swagger-ui.html
+
+=== Débitos Técnicos / Melhorias
+
+* Testes de integração com Karatê
+* Utilizar Docker Compose
